@@ -1,0 +1,90 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav opened mode="side">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  
+
+  <div *ngIf="!filteredProducts; else filteredLayout">
+    <div class="paginator-wrapper">
+      <mat-paginator
+        [length]="products.length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onPageChange($event)"
+      >
+      </mat-paginator>
+    </div>
+    <div class="sort-menu">
+
+      <a
+        mat-stroked-button
+        class="sort-link"
+        (click)="sortProducts('rating', 'DESC')"
+      >
+        Highest Rating</a
+      >
+      <a
+        mat-stroked-button
+        class="sort-link"
+        (click)="sortProducts('rating', 'ASC')"
+      >
+        Lowest Rating</a
+      >
+       <a
+        mat-stroked-button
+        class="sort-link"
+        (click)="sortProducts('price', 'DESC')"
+        >Highest Price </a
+      >
+      <a
+        mat-stroked-button
+        class="sort-link"
+        (click)="sortProducts('price', 'ASC')"
+        >Lowest Price </a
+      >
+      <a
+        mat-stroked-button
+        class="sort-link"
+        (click)="sortProducts('name', 'DESC')"
+        >A -> Z</a
+      >
+      <a
+        mat-stroked-button
+        class="sort-link"
+        (click)="sortProducts('name', 'ASC')"
+        >Z -> A</a
+      >
+     
+    </div>
+
+    <ng-container *ngIf="pagedList; else mainLayout">
+      <mat-grid-list cols="2" >
+        <mat-grid-tile *ngFor="let product of pagedList">
+          <app-product-card
+            [product]="product"
+            [user]="user"
+          ></app-product-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-container>
+
+    <ng-template #mainLayout>
+      <mat-grid-list cols="2">
+        <mat-grid-tile *ngFor="let product of products">
+          <app-product-card
+            [product]="product"
+            [user]="user"
+          ></app-product-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-template>
+  </div>
+
+  <ng-template #filteredLayout>
+    <mat-grid-list cols="2">
+      <mat-grid-tile *ngFor="let product of filteredProducts">
+        <app-product-card [product]="product" [user]="user"></app-product-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </ng-template>
+</mat-sidenav-container>

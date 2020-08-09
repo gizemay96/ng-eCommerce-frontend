@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+  <a mat-button routerLink="/">
+    <h1>Games Shop</h1>
+  </a>
+
+  <span class="spacer"></span>
+
+  <ng-container *ngIf="!user; else userMenu">
+    <a mat-flat-button routerLink="/register" class="btn">Register</a>
+    <a mat-flat-button routerLink="/login">Login</a>
+  </ng-container>
+
+  <ng-template #userMenu>
+    <img [src]="user.avatarUrl" alt="avatar" class="avatar" *ngIf = "user.avatarUrl"/>
+    <span>Hello, {{ user.username }}</span>
+    <span class="spacer"></span>
+
+    <a routerLink="/checkout" mat-button *ngIf = "userCart"
+      ><mat-icon [matBadge]="cartLength" matBadgeColor="warn" class="cart-icon"
+        >shopping_cart</mat-icon
+      ></a
+    >
+
+    <a mat-flat-button routerLink="/profile" class="btn">My Profile</a>
+    <button mat-flat-button (click)="logout()">Logout</button>
+  </ng-template>
+</mat-toolbar>

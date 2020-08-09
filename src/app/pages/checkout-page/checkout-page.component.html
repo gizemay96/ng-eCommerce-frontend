@@ -1,0 +1,62 @@
+<div class="container-sm">
+  <h1 class="checkout-title">Checkout</h1>
+  <div class="grid-container">
+    <div class="shipping-details">
+      <h3>SHIPPING DETAILS</h3>
+      <mat-divider></mat-divider>
+
+      <div *ngFor="let address of userAddress" class="user-details">
+        <div>
+          <p>{{ address.user.fullname }}</p>
+          <p>{{ address.streetName }}</p>
+          <p>{{ address.suite }}</p>
+          <p>{{ address.city }} / {{ address.country }}</p>
+        </div>
+        <div>
+          <p>{{ address.user.email }}</p>
+        </div>
+      </div>
+
+      <div class="payment-details">
+        <h3>PAYMENT DETAILS</h3>
+        <mat-divider></mat-divider>
+        <div class="form-wrapper">
+          <form (submit)="purchase()">
+            <mat-form-field class="full-width">
+              <mat-label>Name on Card</mat-label>
+              <input [(ngModel)]="cardName" name="cardName" matInput type="text" />
+              <mat-icon matSuffix>account_box</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-label>Credit Card Number</mat-label>
+              <input [(ngModel)]="cardNumber" name="cardNumber" matInput type="text" />
+              <mat-icon matSuffix>credit_card</mat-icon>
+            </mat-form-field>
+
+            <div class="half-input-wrapper">
+              <mat-form-field class="half">
+                <mat-label>Exp. Date</mat-label>
+                <input [(ngModel)]="expDate" name="expDate" matInput type="text" />
+                <mat-icon matSuffix>event</mat-icon>
+              </mat-form-field>
+
+              <mat-form-field class="half">
+                <mat-label>CVC</mat-label>
+                <input [(ngModel)]="cvc" name="cvc" matInput type="text" />
+                <mat-icon matSuffix>lock</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <button type="submit" mat-flat-button color="primary" class="btn">
+              PURCHASE
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="order-details">
+      <app-cart></app-cart>
+    </div>
+  </div>
+</div>

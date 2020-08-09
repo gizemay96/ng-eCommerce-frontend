@@ -1,0 +1,26 @@
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 2fr 8fr 2fr;
+}
+
+.paginator-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.sort-menu {
+  text-align: center;
+  margin: 20px 0;
+
+  .sort-title {
+    margin-right: 5px;
+    font-size: 16px;
+  }
+
+  .sort-link {
+    margin-right: 5px;
+    font-size: 12px;
+  }
+}

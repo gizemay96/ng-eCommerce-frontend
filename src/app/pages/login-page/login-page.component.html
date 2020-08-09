@@ -1,0 +1,31 @@
+<div class="card">
+  <form (submit)="login()">
+    <div class="form-control">
+      <label for="identifier">
+        Email or Username
+        <input
+          type="text"
+          name="identifier"
+          id="identifier"
+          [(ngModel)]="form.identifier"
+        />
+      </label>
+    </div>
+
+    <div class="form-control">
+      <label for="password">
+        Password
+        <input
+          type="password"
+          name="password"
+          id="password"
+          [(ngModel)]="form.password"
+        />
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" class="btn" type="submit" [disabled] = "isLoading"> {{isLoading ? 'Loading...' : 'Login'}} </button>
+    </div>
+  </form>
+</div>

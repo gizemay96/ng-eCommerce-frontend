@@ -1,0 +1,42 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.container {
+  max-width: 1400px;
+  margin: auto;
+}
+
+.container-sm {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card {
+  max-width: 400px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  margin: 10px;
+}
+
+.avatar-lg {
+  width: 120px;
+  height: 120px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  margin: 10px;
+}
