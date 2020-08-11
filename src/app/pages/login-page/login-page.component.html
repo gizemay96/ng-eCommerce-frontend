@@ -1,31 +1,63 @@
-<div class="card">
-  <form (submit)="login()">
-    <div class="form-control">
-      <label for="identifier">
-        Email or Username
-        <input
-          type="text"
-          name="identifier"
-          id="identifier"
-          [(ngModel)]="form.identifier"
-        />
-      </label>
-    </div>
 
-    <div class="form-control">
-      <label for="password">
-        Password
-        <input
-          type="password"
-          name="password"
-          id="password"
-          [(ngModel)]="form.password"
-        />
-      </label>
-    </div>
+<mat-grid-list cols="3">
 
-    <div class="form-actions">
-      <button mat-raised-button color="primary" class="btn" type="submit" [disabled] = "isLoading"> {{isLoading ? 'Loading...' : 'Login'}} </button>
-    </div>
-  </form>
-</div>
+  <mat-grid-tile></mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Login</mat-card-title>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Email or Username</mat-label>
+            <input 
+              formControlName="identifier" 
+              matInput
+              type="text" 
+              placeholder="Email or Username..."
+            >
+            <mat-error *ngIf="identifierErrors && identifierErrors.required">This field is required!</mat-error>
+            <mat-error *ngIf="identifierErrors && identifierErrors.minlength">
+              Min. {{identifierErrors.minlength.requiredLength}} chars are required!
+            </mat-error>
+
+            <button type="button" mat-icon-button matSuffix>
+              <mat-icon>account_circle</mat-icon>
+            </button>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input 
+              formControlName="password"
+              matInput
+              [type]="isPasswordVisible ? 'text' : 'password'"
+              placeholder="Password..."
+            >
+            <mat-error *ngIf="passwordErrors && passwordErrors.required">This field is required!</mat-error>
+            <mat-error *ngIf="passwordErrors && passwordErrors.minlength">
+              Min. {{passwordErrors.minlength.requiredLength}} chars are required!
+            </mat-error>
+
+            <button type="button" mat-icon-button matSuffix (click)="isPasswordVisible = !isPasswordVisible">
+              <mat-icon>{{isPasswordVisible ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <button color="primary" type="submit" mat-raised-button>
+            <span>Login</span>
+            <mat-icon>lock</mat-icon>
+          </button>
+        </p>
+      </form>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile></mat-grid-tile>
+  
+</mat-grid-list>

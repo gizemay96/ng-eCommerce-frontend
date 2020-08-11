@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -34,9 +34,10 @@ import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.compo
 import { QuantityPipe } from './pipes/quantity.pipe';
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { AutoFocusDirective } from './directiver/auto-focus.directive';
+import { EqualValidationDirective } from './directiver/equal-validation.directive';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent, CartComponent, CheckoutPageComponent, QuantityPipe, OrderItemComponent, AutoFocusDirective],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent, CartComponent, CheckoutPageComponent, QuantityPipe, OrderItemComponent, AutoFocusDirective, EqualValidationDirective],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -56,7 +57,8 @@ import { AutoFocusDirective } from './directiver/auto-focus.directive';
     MatBadgeModule,
     MatIconModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule
     
   ],
   providers: [],
