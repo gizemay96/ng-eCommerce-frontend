@@ -19,6 +19,7 @@ import { MatDialogModule, matDialogAnimations } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -35,9 +36,11 @@ import { QuantityPipe } from './pipes/quantity.pipe';
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { AutoFocusDirective } from './directiver/auto-focus.directive';
 import { EqualValidationDirective } from './directiver/equal-validation.directive';
+import { DialogExampleComponent } from './dialog-example/dialog-example.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent, CartComponent, CheckoutPageComponent, QuantityPipe, OrderItemComponent, AutoFocusDirective, EqualValidationDirective],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent, CartComponent, CheckoutPageComponent, QuantityPipe, OrderItemComponent, AutoFocusDirective, EqualValidationDirective, DialogExampleComponent],
+  entryComponents: [DialogExampleComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

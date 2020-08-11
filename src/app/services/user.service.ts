@@ -35,7 +35,6 @@ export class UserService {
         headers: { Authorization: `Bearer ${token}` },
       })
       .subscribe((response: User) => {
-        //console.log(response);
         this.user = response;
         
         this.getDetails();

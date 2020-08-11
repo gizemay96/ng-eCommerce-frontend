@@ -20,8 +20,6 @@ export class PurchaseService {
   ) { }
 
   purchase(cardDetails , selectedAddress){
-    console.log('purchase' , cardDetails);
-
     const token = window.localStorage.getItem('token');
     const httpOptions = {
       headers: {

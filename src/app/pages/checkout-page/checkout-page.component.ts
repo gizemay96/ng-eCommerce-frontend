@@ -43,7 +43,6 @@ export class CheckoutPageComponent implements OnInit {
     this.purchaseService
       .purchase(cartDetails, selectedAddress)
       .subscribe((response) => {
-        console.log('purchased !', response);
         this.cardName = '';
         this.cardNumber = '';
         this.expDate = '';

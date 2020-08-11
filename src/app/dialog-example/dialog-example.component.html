@@ -1,0 +1,159 @@
+<!-- <mat-card>
+    <input type="text" [placeholder]="address.addressName">
+    <input type="text" [placeholder]="address.country">
+    <input type="text" [placeholder]="address.city">
+    <input type="text" [placeholder]="address.streetName">
+    <input type="text" [placeholder]="address.suite">
+</mat-card> -->
+
+
+<mat-card *ngIf="address.addressName; else createAddress">
+    <h1>Edit Your Address</h1>
+  <form [formGroup]="addressForm" (submit)="editAddress()">
+    <p>
+      <mat-form-field class="form-field">
+        <mat-label> Address Name </mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="addressName"
+          [placeholder]="address.addressName"
+        />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="form-field">
+        <mat-label> Suite </mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="suite"
+          [placeholder]="address.suite"
+        />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="form-field">
+        <mat-label> Street Name </mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="streetName"
+          [placeholder]="address.streetName"
+        />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="form-field">
+        <mat-label> City </mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="city"
+          [placeholder]="address.city"
+        />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="form-field">
+        <mat-label> Country </mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="country"
+          [placeholder]="address.country"
+        />
+      </mat-form-field>
+    </p>
+
+    <p>
+        <button color="primary" type="submit" mat-raised-button>
+          <span>Finish</span>
+          <mat-icon>create</mat-icon>
+        </button>
+      </p>
+
+
+  </form>
+</mat-card>
+
+
+<ng-template #createAddress>
+  <mat-card>
+    <h1>Add Your New Address</h1>
+  <form [formGroup]="addressForm" (submit)="addAddress()">
+    <p>
+      <mat-form-field class="form-field">
+        <mat-label> Address Name </mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="addressName"
+          placeholder="Your Address Name"
+        />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="form-field">
+        <mat-label> Suite </mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="suite"
+          placeholder="Suite"
+        />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="form-field">
+        <mat-label> Street </mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="streetName"
+          placeholder="Street"
+        />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="form-field">
+        <mat-label> City </mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="city"
+          placeholder="City"
+        />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="form-field">
+        <mat-label> Country </mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="country"
+          placeholder="Country"
+        />
+      </mat-form-field>
+    </p>
+
+    <p>
+        <button color="primary" type="submit" mat-raised-button>
+          <span>Add</span>
+          <mat-icon>create</mat-icon>
+        </button>
+      </p>
+
+
+  </form>
+</mat-card>
+</ng-template>

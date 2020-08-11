@@ -60,7 +60,6 @@ export class CartService {
 
      this.http.post(`${env.cartsApiURL}`, newCart, httpOptions)
      .subscribe((response:Cart) => {
-       //console.log('newcart',response)
        this.userCart = response
      } )
   }
@@ -85,7 +84,6 @@ export class CartService {
   }
 
   updateCart(orderId: number, userId: number) {
-    //console.log('usercart11', this.userCart)
     const token = window.localStorage.getItem('token');
     const httpOptions = {
       headers: { Authorization: `Bearer ${token}` },
@@ -117,7 +115,6 @@ export class CartService {
       console.warn('delete product' , existingOrder)
       this.orderService.deleteOrder(existingOrder.id)
       .subscribe(response => {
-        //console.log('deleted' , response)
         this.fetchUserCart(userId)
       })
     }

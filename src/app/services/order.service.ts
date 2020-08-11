@@ -25,7 +25,6 @@ export class OrderService {
   }
 
   updateOrder(existingOrder, n:number) {
-    console.log('new qq' , n)
     const token = window.localStorage.getItem('token');
     const httpOptions = {
       headers: {

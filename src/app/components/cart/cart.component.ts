@@ -57,10 +57,8 @@ export class CartComponent implements OnInit {
 
 
   updateQuantity(updateData){
-    console.log('qq' , updateData)
     this.orderService.updateOrder(updateData.order , updateData.updatedQuantity)
     .subscribe(response => {
-      console.log('sadasdad', response)
       this.cartService.fetchUserCart(this.user.id)
     })
   }

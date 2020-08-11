@@ -7,20 +7,52 @@ import { Address } from '../types/address.type';
   providedIn: 'root',
 })
 export class AddressService {
-  private userAddress: Address;
+  private userAddresses: Address[];
 
   constructor(private http: HttpClient) {}
 
   fetchUserAddress(userId) {
     this.http
       .get(`${env.addressApiURL}/?user=${userId}`)
-      .subscribe((response: Address) => {
-        // console.log(response);
-        this.userAddress = response;
+      .subscribe((response: Address[]) => {
+        this.userAddresses = response;
       });
   }
 
   getUserAddresses() {
-    return this.userAddress;
+    return this.userAddresses;
   }
+
+
+  editAddress(newAddress,addressId,userId){
+    const token = window.localStorage.getItem('token');
+    const httpOptions = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+   this.http.put(`${env.addressApiURL}/${addressId}`, newAddress , httpOptions)
+   .subscribe(response => {
+      this.fetchUserAddress(userId);
+      this.getUserAddresses()
+    })
+  }
+
+  addAddress(newAddress,userId){
+    const token = window.localStorage.getItem('token');
+    const httpOptions = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    this.http.post(`${env.addressApiURL}`, newAddress , httpOptions)
+    .subscribe((response:Address) => {
+      this.userAddresses.push(response);
+      this.fetchUserAddress(userId);
+      this.getUserAddresses()
+    })
+  }
+
+
+
+
+
 }

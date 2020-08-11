@@ -46,78 +46,29 @@
   <mat-card class="address-card" *ngIf="userAddress">
     <mat-card-header class="header">
       <mat-card-title>
-        CONTACT INFO
+        MY ADDRESSES
       </mat-card-title>
       <mat-divider></mat-divider>
     </mat-card-header>
-    <mat-card-content>
-      <div class="box">
+    <mat-card-content class="address-card" *ngFor="let address of userAddress">
+      <div class="address-box">
         <div class="box-title">
-          <h3>Address Name</h3>
+          <h3> {{address.addressName}} </h3>
         </div>
-        <div class="box-content">
-          <p>Home Address</p>
+        <div class="address-info">
+          <h4> {{address.streetName}} street / {{ address.city }}  </h4>
         </div>
-      </div>
-
-      <div class="box">
-        <div class="box-title">
-          <h3>Name</h3>
-        </div>
-        <div class="box-content">
-          <p>{{ user.fullname }}</p>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="box-title">
-          <h3>Phone</h3>
-        </div>
-        <div class="box-content">
-          <p>04230030403</p>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="box-title">
-          <h3>Street Name</h3>
-        </div>
-        <div class="box-content">
-          <p>{{ userAddress[0].streetName }}</p>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="box-title">
-          <h3>Suite</h3>
-        </div>
-        <div class="box-content">
-          <p>{{ userAddress[0].suite }}</p>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="box-title">
-          <h3>City</h3>
-        </div>
-        <div class="box-content">
-          <p>{{ userAddress[0].city }}</p>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="box-title">
-          <h3>Country</h3>
-        </div>
-        <div class="box-content">
-          <p>{{ userAddress[0].country }}</p>
+        <div class="addressName-icon">
+          <button (click)="openDialog(address.id)" mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
+            <mat-icon>create</mat-icon>
+          </button>
         </div>
       </div>
     </mat-card-content>
 
      <mat-card-actions class="card-actions">
-      <button mat-raised-button color="primary" class="btn">
-        Edit Contact Info
+      <button (click)="openDialog()" mat-raised-button color="primary" class="btn">
+        ADD NEW ADDRESS
       </button>
     </mat-card-actions>
   </mat-card>
