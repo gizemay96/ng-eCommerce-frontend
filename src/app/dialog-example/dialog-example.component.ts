@@ -53,8 +53,6 @@ export class DialogExampleComponent implements OnInit {
   }
 
   addAddress() {
-    console.log('new addres', this.addressForm.value);
-
     this.dialogRef.close(this.addressForm.value ? this.addressForm.value : null);
   }
 }

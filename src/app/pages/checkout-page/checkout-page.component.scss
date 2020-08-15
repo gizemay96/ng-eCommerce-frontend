@@ -10,10 +10,17 @@
   margin-top: 30px;
 
   .user-details {
+    line-height: 11px;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+  }
+
+  .addresses{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
-    margin: 20px;
+    margin: 20px 0;
     line-height: 11px;
   }
 
@@ -59,4 +66,18 @@
 .half-input-wrapper{
   display: flex;
   justify-content: space-between;
+}
+
+.selectedAdress{
+  border: 2px solid #98272b  !important;
+}
+
+.selected-img{
+  max-width: 110px;
+  transform: translateY(-25px);
+}
+
+.selected-stamp{
+  float: right;
+  transform: translateX(25px);
 }

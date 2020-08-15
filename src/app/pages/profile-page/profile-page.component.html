@@ -58,9 +58,13 @@
         <div class="address-info">
           <h4> {{address.streetName}} street / {{ address.city }}  </h4>
         </div>
-        <div class="addressName-icon">
-          <button (click)="openDialog(address.id)" mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
+        <div class="address-actions">
+          <button class="action-button edit-button" (click)="openDialog(address.id)" mat-mini-fab color="primary" aria-label="Example icon button with a plus one icon">
             <mat-icon>create</mat-icon>
+          </button>
+
+          <button (click)="deleteAddress(address.id)" class="action-button delete-button" mat-mini-fab color="warn" aria-label="Example icon button with a plus one icon">
+            <mat-icon>delete</mat-icon>
           </button>
         </div>
       </div>

@@ -5,8 +5,13 @@
       <h3>SHIPPING DETAILS</h3>
       <mat-divider></mat-divider>
 
-      <div *ngFor="let address of userAddress" class="user-details">
+     <div class="addresses">
+      <div *ngFor="let address of userAddress" class="user-details"  [ngClass]="{'selectedAdress':selectedAddress === address.id}">
+        <div *ngIf="selectedAddress === address.id" class="selected-stamp">
+          <img class="selected-img" src="../../../assets/selected.png" alt="">
+        </div>
         <div>
+          <h3><strong>{{ address.addressName }}</strong></h3>
           <p>{{ address.user.fullname }}</p>
           <p>{{ address.streetName }}</p>
           <p>{{ address.suite }}</p>
@@ -16,7 +21,8 @@
           <p>{{ address.user.email }}</p>
         </div>
       </div>
-
+     </div>
+ 
       <div class="payment-details">
         <h3>PAYMENT DETAILS</h3>
         <mat-divider></mat-divider>
@@ -47,6 +53,13 @@
                 <mat-icon matSuffix>lock</mat-icon>
               </mat-form-field>
             </div>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Select an Address</mat-label>
+              <mat-select [(value)]="selectedAddress">
+                <mat-option required *ngFor="let address of userAddress" [value]="address.id">{{address.addressName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
 
             <button type="submit" mat-flat-button color="primary" class="btn">
               PURCHASE

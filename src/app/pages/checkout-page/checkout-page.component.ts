@@ -14,6 +14,8 @@ export class CheckoutPageComponent implements OnInit {
   expDate: string;
   cvc: string;
 
+  selectedAddress:number = null;
+
   get userAddress() {
     return this.addressService.getUserAddresses();
   }
@@ -33,7 +35,8 @@ export class CheckoutPageComponent implements OnInit {
   }
 
   purchase() {
-    const selectedAddress = this.userAddress[0].id;
+    console.log('id' , this.selectedAddress)
+    const selectedAddress = this.selectedAddress;
     const cartDetails = {
       cardName: this.cardName,
       cardNumber: this.cardNumber,
@@ -47,6 +50,7 @@ export class CheckoutPageComponent implements OnInit {
         this.cardNumber = '';
         this.expDate = '';
         this.cvc = '';
+        console.log(response)
       });
   }
 }

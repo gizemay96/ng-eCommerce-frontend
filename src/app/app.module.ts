@@ -19,7 +19,7 @@ import { MatDialogModule, matDialogAnimations } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 
 
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -61,7 +61,8 @@ import { DialogExampleComponent } from './dialog-example/dialog-example.componen
     MatIconModule,
     MatDialogModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCheckboxModule
     
   ],
   providers: [],

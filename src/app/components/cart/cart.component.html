@@ -10,26 +10,6 @@
   >
 
   </app-order-item>
-  <!-- <div class="user-cart" *ngFor="let product of cartProducts">
-    <img
-      [src]="'http://localhost:1337' + product.img[0].url"
-      alt="product-img"
-      class="product-img"
-    />
-    <p class="product-name">
-      {{ product.name }}
-    </p>
-    <button mat-icon-button color="warn" class="btn" (click) = "removeFromCart(product)">
-      <mat-icon>remove</mat-icon>
-    </button>
-    <p class="product-price">{{product | quantity : userCart.orders }}</p>
-      <button mat-icon-button color="warn" class="btn" (click) = "addToCart(product)">
-        <mat-icon>add</mat-icon>
-      </button>
-      <p class="product-price">
-        x {{ product.price }} $
-      </p>
-  </div> -->
   <mat-divider></mat-divider>
 
   <p class="total-price">Total = {{ getTotal | number }} $</p>

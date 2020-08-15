@@ -88,10 +88,14 @@
         margin-top: 20px;
     }
 
-    .addressName-icon{
-        padding: 0 20px;
+    .address-actions{
+        padding: 0 10px;
         .icon-go{
             font-size: 30px;
+        }
+
+        .action-button{
+            margin: 0 10px;
         }
     }
 

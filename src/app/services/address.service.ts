@@ -51,6 +51,22 @@ export class AddressService {
     })
   }
 
+  deleteAddress(addressId,userId){
+    console.log(addressId)
+    const token = window.localStorage.getItem('token');
+    const httpOptions = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    this.http.delete(`${env.addressApiURL}/${addressId}`)
+    .subscribe(response => {
+      this.fetchUserAddress(userId)
+      this.getUserAddresses()
+    })
+
+
+  }
+
 
 
 

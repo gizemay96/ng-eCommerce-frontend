@@ -69,4 +69,11 @@ export class ProfilePageComponent implements OnInit {
       });
     }
   }
+
+
+  deleteAddress(addressId){
+    this.addressService.deleteAddress(addressId,this.user.id)
+  }
+
+
 }
