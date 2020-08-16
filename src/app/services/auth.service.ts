@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
 import { CartService } from './cart.service';
 import { User } from '../types/user.type';
+import {tap} from 'rxjs/operators';
+import {of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +23,16 @@ export class AuthService {
   }
 
   login(loginData) {
-    return this.http.post(`${this.baseUrl}/local`, loginData);
+    return this.http.post(`${this.baseUrl}/local`, loginData)
+      .pipe(
+        tap(this.tapHandler)
+      )
+  }
+
+  tapHandler(response) {
+    console.log('Successful Login', response)
+
+    return of(response)
   }
 
   logout() {

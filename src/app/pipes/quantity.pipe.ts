@@ -6,12 +6,10 @@ import { CartService } from '../services/cart.service';
 })
 export class QuantityPipe implements PipeTransform {
 
-  constructor(
-    private cartService:CartService
-  ){}
+  constructor(private cartService: CartService){}
 
-  transform(product, orders, ...args: unknown[]): unknown {
-    const userCart = this.cartService.getUserCart()
+  transform(product, ...args: unknown[]): unknown {
+    const userCart = this.cartService.getUserCart();
     const order = userCart.orders.find(order => order.product === product.id)
 
     return order ? order.quantity : 0;

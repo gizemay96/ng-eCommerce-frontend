@@ -1,5 +1,6 @@
 <div class="card">
   <form (submit)="register()">
+    <p class="form-error" *ngIf="errorMsg">{{errorMsg}}</p>
     <div class="form-control">
       <label for="username">
         Username

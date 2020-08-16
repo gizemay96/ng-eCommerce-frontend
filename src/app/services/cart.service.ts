@@ -58,18 +58,17 @@ export class CartService {
       orders: []
     }
 
-     this.http.post(`${env.cartsApiURL}`, newCart, httpOptions)
-     .subscribe((response:Cart) => {
-       //console.log('newcart',response)
-       this.userCart = response
-     } )
+    this.http.post(`${env.cartsApiURL}`, newCart, httpOptions)
+      .subscribe((response: Cart) => {
+        this.userCart = response
+      })
   }
 
   addToCart(newProduct: Product, userId: number) {
     const existingOrder = this.userCart.orders.find(order => order.product === newProduct.id)
 
     if (existingOrder) {
-      this.orderService.updateOrder(existingOrder , existingOrder.quantity +1)
+      this.orderService.updateOrder(existingOrder, existingOrder.quantity + 1)
         .subscribe(response => {
           this.fetchUserCart(userId)
         })
@@ -85,7 +84,6 @@ export class CartService {
   }
 
   updateCart(orderId: number, userId: number) {
-    //console.log('usercart11', this.userCart)
     const token = window.localStorage.getItem('token');
     const httpOptions = {
       headers: { Authorization: `Bearer ${token}` },
@@ -106,21 +104,18 @@ export class CartService {
   removeFromCart(product: Product, userId: number) {
     const existingOrder = this.userCart.orders.find(order => order.product === product.id)
 
-    if(!existingOrder) return;
+    if (!existingOrder) return;
 
-    if(existingOrder.quantity > 1){
-      this.orderService.updateOrder(existingOrder , existingOrder.quantity -1)
-      .subscribe(response => {
-        this.fetchUserCart(userId)
-      })
-    }else {
-      console.warn('delete product' , existingOrder)
+    if (existingOrder.quantity > 1) {
+      this.orderService.updateOrder(existingOrder, existingOrder.quantity - 1)
+        .subscribe(response => {
+          this.fetchUserCart(userId)
+        })
+    } else {
       this.orderService.deleteOrder(existingOrder.id)
-      .subscribe(response => {
-        //console.log('deleted' , response)
-        this.fetchUserCart(userId)
-      })
+        .subscribe(response => {
+          this.fetchUserCart(userId)
+        })
     }
-  
   }
 }

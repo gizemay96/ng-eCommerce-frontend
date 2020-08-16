@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { AuthResponse } from 'src/app/types/authResponse.type';
 import { CartService } from 'src/app/services/cart.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register-page',
@@ -12,19 +13,20 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class RegisterPageComponent implements OnInit {
   isLoading: boolean = false;
-
   form = {
     username: '',
     email: '',
     password: '',
     confirmPassword: '',
   };
+  errorMsg = ''
 
   constructor(
     private authService: AuthService,
     private userService: UserService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private _snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
@@ -40,22 +42,34 @@ export class RegisterPageComponent implements OnInit {
 
     this.authService
       .register(registerData)
-      .subscribe((response: AuthResponse) => {
-        
-        this.userService.setUser(response.user);
-        this.authService.setToken(response.jwt);
-        this.cartService.createCart(response.user.id);
+      .subscribe(
+        this.registerSuccess,
+        (error) => {
+          console.error('EEEE', error)
+          this.errorMsg = error.message
+          this._snackbar.open(error.message, 'OK', {
+            duration: 5000
+          })
+          this.isLoading = false;
+        }
+      );
+  }
 
-        this.form = {
-          username: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-        };
+  registerSuccess(response: AuthResponse) {
+    this.userService.setUser(response.user);
+    this.authService.setToken(response.jwt);
+    this.cartService.createCart(response.user.id);
 
-        this.isLoading = false;
+    this.form = {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    };
 
-        this.router.navigateByUrl('/');
-      });
+    this.isLoading = false;
+    this.errorMsg = '';
+
+    this.router.navigateByUrl('/');
   }
 }

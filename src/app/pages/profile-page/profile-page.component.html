@@ -43,82 +43,49 @@
     </mat-card-actions>
   </mat-card>
 
-  <mat-card class="address-card" *ngIf="userAddress">
+  <mat-card class="address-card" *ngIf="userAddresses">
     <mat-card-header class="header">
       <mat-card-title>
-        CONTACT INFO
+        Addresses
       </mat-card-title>
       <mat-divider></mat-divider>
     </mat-card-header>
-    <mat-card-content>
-      <div class="box">
-        <div class="box-title">
-          <h3>Address Name</h3>
-        </div>
-        <div class="box-content">
-          <p>Home Address</p>
-        </div>
-      </div>
 
-      <div class="box">
-        <div class="box-title">
-          <h3>Name</h3>
-        </div>
-        <div class="box-content">
-          <p>{{ user.fullname }}</p>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="box-title">
-          <h3>Phone</h3>
-        </div>
-        <div class="box-content">
-          <p>04230030403</p>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="box-title">
-          <h3>Street Name</h3>
-        </div>
-        <div class="box-content">
-          <p>{{ userAddress[0].streetName }}</p>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="box-title">
-          <h3>Suite</h3>
-        </div>
-        <div class="box-content">
-          <p>{{ userAddress[0].suite }}</p>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="box-title">
-          <h3>City</h3>
-        </div>
-        <div class="box-content">
-          <p>{{ userAddress[0].city }}</p>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="box-title">
-          <h3>Country</h3>
-        </div>
-        <div class="box-content">
-          <p>{{ userAddress[0].country }}</p>
-        </div>
-      </div>
-    </mat-card-content>
-
-     <mat-card-actions class="card-actions">
-      <button mat-raised-button color="primary" class="btn">
-        Edit Contact Info
+    <mat-card-actions class="card-actions">
+      <button mat-flat-button color="primary" class="btn" (click)="openAddressDialog()">
+        Add Addreess
       </button>
     </mat-card-actions>
+
+    <mat-card-content>
+
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let userAddress of userAddresses">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{userAddress.name}}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>
+            {{userAddress.streetName}} {{userAddress.suite}} {{userAddress.city}}/{{userAddress.country}}
+          </p>
+          <mat-action-row>
+            <button 
+              mat-button 
+              color="warn" 
+              class="btn" 
+              (click)="deleteAddress(userAddress.id)">
+              Delete
+            </button>
+            <button 
+              mat-button 
+              color="primary" 
+              class="btn" 
+              (click)="openAddressDialog(userAddress)">
+              Edit Address
+            </button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+      
+    </mat-card-content>
   </mat-card>
 </div>

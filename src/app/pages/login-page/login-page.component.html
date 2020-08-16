@@ -1,5 +1,6 @@
 <div class="card">
-  <form (submit)="login()">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <p class="form-error" *ngIf="errorMsg">{{errorMsg}}</p>
     <div class="form-control">
       <label for="identifier">
         Email or Username
@@ -7,8 +8,19 @@
           type="text"
           name="identifier"
           id="identifier"
-          [(ngModel)]="form.identifier"
+          formControlName="identifier"
         />
+        <!-- <div *ngIf="identifierErrors">
+
+          <small *ngIf="identifierErrors.required">
+            {{identifierErrors.required}}
+          </small>
+
+          <small *ngIf="identifierErrors.minLength">
+            {{identifierErrors.minLength}}
+          </small>
+
+        </div> -->
       </label>
     </div>
 
@@ -19,7 +31,7 @@
           type="password"
           name="password"
           id="password"
-          [(ngModel)]="form.password"
+          formControlName="password"
         />
       </label>
     </div>

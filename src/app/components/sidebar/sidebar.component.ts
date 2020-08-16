@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Category } from 'src/app/types/category.type';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,9 +15,17 @@ export class SidebarComponent implements OnInit {
     return this.productService.getCategories();
   }
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+        this.selectedGenre = +params['category'];
+    });
+  }
 
   filterProducts() {
     this.productService.filterProducts(this.selectedGenre);
@@ -25,5 +34,12 @@ export class SidebarComponent implements OnInit {
   resetFilters() {
     this.productService.resetFilters()
     this.selectedGenre = null;
+  }
+
+  setGenre(event) {
+    console.log(event.value)
+    this.router.navigate(['/'], {
+      queryParams: {category: event.value}
+    })    
   }
 }

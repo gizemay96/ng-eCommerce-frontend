@@ -35,8 +35,8 @@ export class UserService {
         headers: { Authorization: `Bearer ${token}` },
       })
       .subscribe((response: User) => {
-        //console.log(response);
         this.user = response;
+        console.log(response)
         
         this.getDetails();
         this.cartService.fetchUserCart(this.user.id)

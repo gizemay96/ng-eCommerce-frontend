@@ -4,7 +4,7 @@
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Genre</mat-label>
-        <mat-select [(ngModel)]="selectedGenre" name="genre">
+        <mat-select [value]="selectedGenre" (selectionChange)="setGenre($event)" name="genre">
           <mat-option *ngFor="let category of categories" [value]="category.id">
             {{ category.name }}
           </mat-option>

@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { AuthResponse } from '../../types/authResponse.type';
 import { CartService } from 'src/app/services/cart.service';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -12,11 +13,19 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class LoginPageComponent implements OnInit {
   isLoading: boolean = false;
+  errorMsg: string = '';
+  loginForm = new FormGroup({
+    identifier: new FormControl('', [Validators.required, Validators.min(3)]),
+    password: new FormControl('', [Validators.required, Validators.min(6)])
+  })
 
-  form = {
-    identifier: '',
-    password: '',
-  };
+  // get identifierErrors() {
+  //   return this.form.errors && this.form.errors.identifier;
+  // }
+
+  // get passwordErrors() {
+  //   return this.form.errors && this.form.errors.password;
+  // }
 
   constructor(
     private authService: AuthService,
@@ -28,21 +37,31 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
-    this.isLoading = true;
+    console.log(this.loginForm)
+    if (this.loginForm.valid) {
+      this.isLoading = true;
+      this.errorMsg = '';
 
-    this.authService.login(this.form).subscribe((response: AuthResponse) => {
-      this.authService.setToken(response.jwt);
-      this.userService.setUser(response.user);
-      this.cartService.fetchUserCart(response.user.id)
+      this.authService.login(this.loginForm.value).subscribe(
+        this.loginSuccess.bind(this),
+        this.loginError
+      );
+    }
+  }
 
-      this.isLoading = false;
+  loginError = (error) => {
+    this.errorMsg = error.message
+    this.isLoading = false
+  }
 
-      this.form = {
-        identifier: '',
-        password: '',
-      };
+  loginSuccess(response) {
+    this.authService.setToken(response.jwt);
+    this.userService.setUser(response.user);
+    this.cartService.fetchUserCart(response.user.id)
 
-      this.router.navigateByUrl('/');
-    });
+    this.isLoading = false;
+    this.loginForm.reset();
+
+    this.router.navigateByUrl('/');
   }
 }

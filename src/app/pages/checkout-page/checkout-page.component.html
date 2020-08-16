@@ -5,16 +5,13 @@
       <h3>SHIPPING DETAILS</h3>
       <mat-divider></mat-divider>
 
-      <div *ngFor="let address of userAddress" class="user-details">
-        <div>
-          <p>{{ address.user.fullname }}</p>
-          <p>{{ address.streetName }}</p>
-          <p>{{ address.suite }}</p>
-          <p>{{ address.city }} / {{ address.country }}</p>
-        </div>
-        <div>
-          <p>{{ address.user.email }}</p>
-        </div>
+      <div class="user-details">
+        <mat-radio-group [(ngModel)]="selectedAddress">
+          <mat-radio-button *ngFor="let address of userAddresses" [value]="address.id">
+            <p>{{address.name}}</p>
+            <p>{{address.streetName}} {{address.suite}} {{address.city}} {{address.country}}</p>
+          </mat-radio-button>
+        </mat-radio-group>
       </div>
 
       <div class="payment-details">
@@ -30,27 +27,25 @@
 
             <mat-form-field class="full-width">
               <mat-label>Credit Card Number</mat-label>
-              <input [(ngModel)]="cardNumber" name="cardNumber" matInput type="text" />
+              <input [(ngModel)]="cardNumber" name="cardNumber" matInput type="text">
               <mat-icon matSuffix>credit_card</mat-icon>
             </mat-form-field>
 
             <div class="half-input-wrapper">
-              <mat-form-field class="half">
+              <mat-form-field class="half-width">
                 <mat-label>Exp. Date</mat-label>
-                <input [(ngModel)]="expDate" name="expDate" matInput type="text" />
+                <input [(ngModel)]="expDate" name="expDate" matInput text="text">
                 <mat-icon matSuffix>event</mat-icon>
               </mat-form-field>
-
-              <mat-form-field class="half">
+  
+              <mat-form-field class="half-width">
                 <mat-label>CVC</mat-label>
-                <input [(ngModel)]="cvc" name="cvc" matInput type="text" />
+                <input [(ngModel)]="cvc" name="cvc" matInput text="text">
                 <mat-icon matSuffix>lock</mat-icon>
               </mat-form-field>
             </div>
 
-            <button type="submit" mat-flat-button color="primary" class="btn">
-              PURCHASE
-            </button>
+            <button mat-flat-button color="primary" class="btn">PURCHASE</button>
           </form>
         </div>
       </div>
