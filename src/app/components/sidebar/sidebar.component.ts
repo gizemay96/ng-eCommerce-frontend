@@ -34,6 +34,7 @@ export class SidebarComponent implements OnInit {
   resetFilters() {
     this.productService.resetFilters()
     this.selectedGenre = null;
+    this.router.navigate(['/'])
   }
 
   setGenre(event) {

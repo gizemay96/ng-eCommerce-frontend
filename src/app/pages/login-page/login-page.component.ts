@@ -50,6 +50,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginError = (error) => {
+    console.log(error)
     this.errorMsg = error.message
     this.isLoading = false
   }
