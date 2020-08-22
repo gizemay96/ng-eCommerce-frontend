@@ -11,12 +11,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule, matFormFieldAnimations } from '@angular/material/form-field';
+import {
+  MatFormFieldModule,
+  matFormFieldAnimations,
+} from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, matDialogAnimations } from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,13 +37,28 @@ import { QuantityPipe } from './pipes/quantity.pipe';
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
 import { AddressDialogComponent } from './pages/dialogs/address-dialog/address-dialog.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent, CartComponent, CheckoutPageComponent, QuantityPipe, OrderItemComponent, AutoFocusDirective, AddressDialogComponent],
+  declarations: [
+    AppComponent,
+    LoginPageComponent,
+    RegisterPageComponent,
+    NavbarComponent,
+    HomePageComponent,
+    ProfilePageComponent,
+    ProductCardComponent,
+    SidebarComponent,
+    CartComponent,
+    CheckoutPageComponent,
+    QuantityPipe,
+    OrderItemComponent,
+    AutoFocusDirective,
+    AddressDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

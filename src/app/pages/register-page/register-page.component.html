@@ -1,53 +1,112 @@
-<div class="card">
-  <form (submit)="register()">
-    <p class="form-error" *ngIf="errorMsg">{{errorMsg}}</p>
-    <div class="form-control">
-      <label for="username">
-        Username
-        <input
-          type="text"
-          name="username"
-          id="username"
-          [(ngModel)]="form.username"
-        />
-      </label>
-    </div>
+<mat-grid-list cols="3">
+  <mat-grid-tile></mat-grid-tile>
 
-    <div class="form-control">
-      <label for="email">
-        Email
-        <input type="email" name="email" id="email" [(ngModel)]="form.email" />
-      </label>
-    </div>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Register</mat-card-title>
 
-    <div class="form-control">
-      <label for="password">
-        Password
-        <input
-          type="password"
-          name="password"
-          id="password"
-          [(ngModel)]="form.password"
-        />
-      </label>
-    </div>
+      <form [formGroup]="registerForm" (submit)="register()" EqualValidation>
+        <p>
+          <mat-form-field>
+            <mat-label>Your Name</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="username"
+              placeholder="Name"
+            />
+            <mat-error *ngIf="userNameErrors && userNameErrors.required"
+              >This field is required!</mat-error
+            >
+            <mat-error *ngIf="userNameErrors && userNameErrors.minlength">
+              Min. {{ userNameErrors.minlength.requiredLength }} chars are
+              required!
+            </mat-error>
+            <button type="button" mat-icon-button matSuffix>
+              <mat-icon>fiber_new</mat-icon>
+            </button>
+          </mat-form-field>
+        </p>
 
-    <div class="form-control">
-      <label for="confirm-password">
-        Confirm Password
-        <input
-          type="password"
-          name="confirm-password"
-          id="confirm-password"
-          [(ngModel)]="form.confirmPassword"
-        />
-      </label>
-    </div>
+        <p>
+          <mat-form-field>
+            <mat-label>Your Email</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="email"
+              placeholder="Email"
+            />
+            <mat-error *ngIf="EmailErrors && EmailErrors.required"
+              >This field is required!</mat-error
+            >
+            <mat-error *ngIf="EmailErrors && EmailErrors.email"
+              >Your email address is invalid!</mat-error
+            >
+            <button type="button" mat-icon-button matSuffix>
+              <mat-icon>mail</mat-icon>
+            </button>
+          </mat-form-field>
+        </p>
 
-    <div class="form-actions">
-      <button mat-raised-button color="primary" class="btn" type="submit" [disabled]="isLoading">
-        {{ isLoading ? "Loading..." : "Register" }}
-      </button>
-    </div>
-  </form>
-</div>
+        <p>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+              type="password"
+              name="password"
+              matInput
+              formControlName="password"
+            />
+            <!--  Pattern Validation
+              <mat-error *ngIf="passwordErrors && passwordErrors.invalidPassword"
+              >Password should have minimum 6 characters, at least 1 uppercase letter, 1 lowercase    
+              letter and 1 number </mat-error
+            > 
+          -->
+            <mat-error *ngIf="passwordErrors && passwordErrors.required"
+              >This field is required!</mat-error
+            >
+            <mat-error *ngIf="passwordErrors && passwordErrors.minlength"
+              >Min. {{ passwordErrors.minlength.requiredLength }} chars are
+              required!</mat-error
+            >
+            <button type="button" mat-icon-button matSuffix>
+              <mat-icon>vpn_key</mat-icon>
+            </button>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <mat-label>Confirm Password</mat-label>
+            <input
+              type="password"
+              name="confirPassword"
+              matInput
+              formControlName="confirmPassword"
+              EqualValidation="password"
+            />
+            <mat-error
+              *ngIf="confirmPassErrors && confirmPassErrors.passwordMismatch"
+            >
+              Passwords is not match !
+            </mat-error>
+            <button type="button" mat-icon-button matSuffix>
+              <mat-icon>lock</mat-icon>
+            </button>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <button color="primary" type="submit" mat-raised-button>
+            <span>Register</span>
+            <mat-icon>create</mat-icon>
+          </button>
+        </p>
+      </form>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>

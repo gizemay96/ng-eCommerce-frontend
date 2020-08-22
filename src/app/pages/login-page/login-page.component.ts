@@ -4,7 +4,8 @@ import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { AuthResponse } from '../../types/authResponse.type';
 import { CartService } from 'src/app/services/cart.service';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login-page',
@@ -12,57 +13,70 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
-  isLoading: boolean = false;
-  errorMsg: string = '';
   loginForm = new FormGroup({
-    identifier: new FormControl('', [Validators.required, Validators.min(3)]),
-    password: new FormControl('', [Validators.required, Validators.min(6)])
-  })
+    identifier: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+  });
 
-  // get identifierErrors() {
-  //   return this.form.errors && this.form.errors.identifier;
-  // }
+  isLoading: boolean = false;
+  isPasswordVisible: boolean = false;
+  touch = this.loginForm.touched;
 
-  // get passwordErrors() {
-  //   return this.form.errors && this.form.errors.password;
-  // }
+  errorMsg: string = '';
+
+  get identifierErrors() {
+    return this.loginForm.controls.identifier.errors;
+  }
+
+  get passwordErrors() {
+    return this.loginForm.controls.password.errors;
+  }
 
   constructor(
     private authService: AuthService,
     private userService: UserService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private _snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
 
   login() {
-    console.log(this.loginForm)
     if (this.loginForm.valid) {
       this.isLoading = true;
       this.errorMsg = '';
 
-      this.authService.login(this.loginForm.value).subscribe(
-        this.loginSuccess.bind(this),
-        this.loginError
-      );
+      this.authService
+        .login(this.loginForm.value)
+        .subscribe(this.loginSuccess, this.loginError);
     }
   }
 
   loginError = (error) => {
-    console.log(error)
-    this.errorMsg = error.message
-    this.isLoading = false
-  }
+    //console.log('error', error.error.message[0].messages[0].message);
+    this.errorMsg = error.error.message[0].messages[0].message;
+    console.log(this.errorMsg);
+    this._snackbar.open(this.errorMsg, 'OK', {
+      duration: 5000,
+    });
+    this.isLoading = false;
+  };
 
-  loginSuccess(response) {
+  loginSuccess = (response) => {
     this.authService.setToken(response.jwt);
     this.userService.setUser(response.user);
-    this.cartService.fetchUserCart(response.user.id)
+    this.cartService.fetchUserCart(response.user.id);
 
     this.isLoading = false;
     this.loginForm.reset();
 
     this.router.navigateByUrl('/');
-  }
+  };
 }
